@@ -132,7 +132,9 @@ public class ChuyenDichDongForm extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(rootPane,"PlainText or Key invalid");
         }
         else{
+            
             int number = plainText.length() % key .length();
+            //if plaintext not fill matrix
             if(number !=0){
                 //random character x -> z and append plaintext
                 for(int i = 0; i < key.length()-number  ; i++){
@@ -146,6 +148,7 @@ public class ChuyenDichDongForm extends javax.swing.JFrame {
             for(int i = 0; i < arrayKey.length ;i++){
                 
                 int index = findMinCharacterIndex(arrayKey);
+                //character "{" = 123 in ascii 
                 arrayKey[index] = "{";
                 for(int j = index; j < plainText.length(); j+= arrayKey.length){
                     cipherText += plainText.charAt(j);
