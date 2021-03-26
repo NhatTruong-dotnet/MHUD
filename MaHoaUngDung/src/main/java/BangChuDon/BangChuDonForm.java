@@ -176,7 +176,7 @@ public class BangChuDonForm extends javax.swing.JFrame {
             key+= (char)(listNumber.get(random) + 97);
             listNumber.remove(random);
         }
-        txtKeyEncrypt.setText(key +"");
+        txtKeyEncrypt.setText(key);
     }//GEN-LAST:event_btnRandomKeyActionPerformed
     
     
