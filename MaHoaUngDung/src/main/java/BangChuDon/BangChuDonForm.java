@@ -146,8 +146,7 @@ public class BangChuDonForm extends javax.swing.JFrame {
         String plainText = tareaEcryption.getText();
         plainText = formatInput(plainText);
         key = formatInput(key);
-        plainText = formatInput(plainText);
-        key = formatInput(key);
+        
         String cipherText = "";
         
         if(key.length() != 26 || !check(key) || !check(plainText)){
