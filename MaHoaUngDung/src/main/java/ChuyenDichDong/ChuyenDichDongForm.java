@@ -166,12 +166,12 @@ public class ChuyenDichDongForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnEncryptionActionPerformed
 
     private void btnDecryptionActionPerformed(java.awt.event.ActionEvent evt, Component frame) {//GEN-FIRST:event_btnDecryptionActionPerformed
-        try
+          try
         {             
         String keyDecryption =   txtKeyDecryption.getText().replaceAll("\\s", "");
         String cipherText =  tareaDecryption.getText().replaceAll("\\s", "");
         if(keyDecryption.length()==0 || cipherText.length()==0)
-             JOptionPane.showMessageDialog(frame, "Khong ðý?c b? tr?ng");
+             JOptionPane.showMessageDialog(frame, "Khong ï¿½ï¿½?c b? tr?ng");
         else
         {
             if(checkNumInString(keyDecryption) && checkNumInString(cipherText) )
@@ -186,7 +186,7 @@ public class ChuyenDichDongForm extends javax.swing.JFrame {
             }
             else
             {
-                JOptionPane.showMessageDialog(frame, "Key và cipherText không ðý?c ch?a s?");
+                JOptionPane.showMessageDialog(frame, "Key vï¿½ cipherText khï¿½ng ï¿½ï¿½?c ch?a s?");
             }
         }
         }
@@ -194,7 +194,7 @@ public class ChuyenDichDongForm extends javax.swing.JFrame {
          JOptionPane.showMessageDialog(frame, e);
        } 
     }//GEN-LAST:event_btnDecryptionActionPerformed
-    public static String decryptCT(String key, String text) {
+     public static String decryptCT(String key, String text) {
         int[] arrange = arrangeKey(key);
         int lenkey = arrange.length;
         int lentext = text.length();
@@ -262,7 +262,7 @@ public class ChuyenDichDongForm extends javax.swing.JFrame {
         str = str.toLowerCase().trim().replaceAll("\\s{1,}","");
         return str;
     }
-    private boolean check(String string){
+     private boolean check(String string){
         if(string.length()==0){
             return false;
         }
