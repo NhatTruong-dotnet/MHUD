@@ -6,6 +6,8 @@
 package javaapplication2;
 
 
+import java.awt.Component;
+import java.util.Arrays;
 import javax.swing.JOptionPane;
 
 /**
@@ -65,6 +67,11 @@ public class ChuyenDichDongForm extends javax.swing.JFrame {
         jLabel2.setText("key");
 
         btnDecryption.setText("Decryption");
+        btnDecryption.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDecryptionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -154,6 +161,87 @@ public class ChuyenDichDongForm extends javax.swing.JFrame {
         }
         tareaDecryption.setText(cipherText);
     }//GEN-LAST:event_btnEncryptionActionPerformed
+
+    private void btnDecryptionActionPerformed(java.awt.event.ActionEvent evt, Component frame) {//GEN-FIRST:event_btnDecryptionActionPerformed
+        try
+        {             
+        String keyDecryption =   txtKeyDecryption.getText().replaceAll("\\s", "");
+        String cipherText =  tareaDecryption.getText().replaceAll("\\s", "");
+        if(keyDecryption.length()==0 || cipherText.length()==0)
+             JOptionPane.showMessageDialog(frame, "Khong ðý?c b? tr?ng");
+        else
+        {
+            if(checkNumInString(keyDecryption) && checkNumInString(cipherText) )
+            {
+                 if(cipherText.length()%keyDecryption.length()==0){
+                 String arraylainText=decryptCT(keyDecryption, cipherText);
+                 tareaDecryption.setText(arraylainText);
+                 }
+                else{
+                JOptionPane.showMessageDialog(frame, "CipherText ph?i chia h?t cho key");
+                }
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(frame, "Key và cipherText không ðý?c ch?a s?");
+            }
+        }
+        }
+         catch(Exception  e){
+         JOptionPane.showMessageDialog(frame, e);
+       } 
+    }//GEN-LAST:event_btnDecryptionActionPerformed
+    public static String decryptCT(String key, String text) {
+        int[] arrange = arrangeKey(key);
+        int lenkey = arrange.length;
+        int lentext = text.length();
+        int row = (int) Math.ceil((double) lentext / lenkey);
+        String regex = "(?<=\\G.{" + row + "})";
+        String[] get = text.split(regex);
+
+        char[][] grid = new char[row][lenkey];
+
+        for (int x = 0; x < lenkey; x++) {
+            for (int y = 0; y < lenkey; y++) {
+                if (arrange[x] == y) {
+                    for (int z = 0; z < row; z++) {
+                        grid[z][y] = get[arrange[y]].charAt(z);
+                    }
+                }
+            }
+        }
+        String dec = "";
+        for (int x = 0; x < row; x++) {
+            for (int y = 0; y < lenkey; y++) {
+                dec = dec + grid[x][y];
+            }
+        }
+
+        return dec;
+    }
+     public static int[] arrangeKey(String key) {
+        //arrange position of grid
+        String[] keys = key.split("");
+        Arrays.sort(keys);
+        int[] num = new int[key.length()];
+        for (int x = 0; x < keys.length; x++) {
+            for (int y = 0; y < key.length(); y++) {
+                if (keys[x].equals(key.charAt(y) + "")) {
+                    num[y] = x;
+                    break;
+                }
+            }
+        }
+        return num;
+    }
+     private static boolean checkNumInString(String key)
+    {
+         if(key.matches(".*\\d.*")==true)
+          return false;        
+        return true;
+                  
+    }
+    
     private int findMinCharacterIndex(String[]array){
         String maxCharacter = array[0];
         int index = 0;
